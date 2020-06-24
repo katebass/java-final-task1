@@ -78,12 +78,16 @@ public class Main {
 
         // define a path where first 20 pairs will be written
         Path path = Paths.get("/home/kate/apps/java-final-task/src/test.txt");
+        Files.write(path, ("First 20 words pairs: \n\n").getBytes(), StandardOpenOption.APPEND);
+
         // write first 20 pairs to the file test.txt
         for (int i = 0; i < 20; i++) {
             Map.Entry<String, Integer> pair = items.next(); // get next item
             System.out.format("Word: %s, occurences: %d%n", pair.getKey(), pair.getValue());
             // write occurrence pair to the file
-            Files.write(path, (pair.getKey() + "\n").getBytes(), StandardOpenOption.APPEND);
+            Files.write(path, ("Word: " + pair.getKey()
+                                + " | occurences: " + pair.getValue() + "\n")
+                                .getBytes(), StandardOpenOption.APPEND);
         }
 
         // -----------------------------------------------------------------------
@@ -109,7 +113,8 @@ public class Main {
         // -----------------------------------------------------------------------
         // 1.8. First 20 pairs and names write into to a file test.txt
         // writing first 20 names to the file test.txt
-        System.out.println("First 20 names: ");
+        System.out.println("First 20 proper names: ");
+        Files.write(path, ("\n\nFirst 20 proper names: \n\n").getBytes(), StandardOpenOption.APPEND);
         for (int i = 0; i < 20; i++) {
             // printing the result
             System.out.println(properNames.get(i));
